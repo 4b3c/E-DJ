@@ -1,19 +1,16 @@
-import sounddevice as sd
-from pydub import AudioSegment
 import numpy as np
+import math
+import sounddevice as sd
 
-# Read the audio file
-audio = AudioSegment.from_file('C:/Users/Abram P/Desktop/Programming/Python_scripts/sound/E-DJ/MeizongHelios.wav', format='wav')
+frequency = 20
+sample_rate = 44000
+duration = 1
+volume = 0.05
 
-# Split from 3 to 8 seconds of the audio
-sliced_audio = audio[3000:10000]
+t = np.arange(int(sample_rate * duration))
+raw_data = np.sin(2 * np.pi * frequency * t / sample_rate) * volume
 
-# Adjust the playback speed
-adjusted_audio = sliced_audio.speedup(playback_speed=1.2)
+print(raw_data[:10])
 
-# Convert the adjusted audio to raw data
-raw_data = np.array(adjusted_audio.get_array_of_samples())
-
-# Play the edited audio in real-time
-sd.play(raw_data, adjusted_audio.frame_rate)
+sd.play(raw_data, sample_rate)
 sd.wait()
