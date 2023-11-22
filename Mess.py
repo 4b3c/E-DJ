@@ -66,7 +66,7 @@ class Graph:
 
 
 sample_rate = 44100
-duration = 3
+duration = 8
 volume = 0.03
 
 
@@ -89,7 +89,6 @@ while running:
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			if play_sound.is_clicked(event.pos):
 				sd.play(raw_data, sample_rate)
-				sd.wait()
 			if add_E.is_clicked(event.pos):
 				sound_graph.add_freq(329.63)
 			if add_G.is_clicked(event.pos):
